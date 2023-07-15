@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rover</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body style="background-color:antiquewhite ">
+    <div class="container-fluid">
+        <div class="row p-3">
+            <div class="col-md-8" id="cameraImage">
+                <!--<img src="http://192.168.0.22/" class="img-fluid">-->
+            </div>
+
+            <div class="col-md-4">
+                <div id="joyDiv" style="width:200px;height:200px;margin-bottom:20px;"></div>
+                <p id="joy-output"></p>
+                <input type="checkbox" class="btn-check" id="connection_active" checked autocomplete="off">
+                <label class="btn btn-outline-success" for="connection_active">Connect</label><br>
+                <legend>Socket state:</legend>
+                <h4 id="socketState"></h4>
+                <form>
+                    <fieldset>
+                        <legend>Command sending rate:</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sendingRateRadio" id="500ms" value="500" checked>
+                            <label class="form-check-label" for="500ms">
+                            500 ms
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sendingRateRadio" id="250ms" value="250">
+                            <label class="form-check-label" for="250ms">
+                            250 ms
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sendingRateRadio" id="100ms" value="100">
+                            <label class="form-check-label" for="100ms">
+                            100 ms
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sendingRateRadio" id="50ms" value="50">
+                            <label class="form-check-label" for="50ms">
+                            50 ms
+                            </label>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="joy.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
