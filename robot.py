@@ -1,4 +1,5 @@
 import pigpio
+import logging
 from math import floor
 from time import sleep
 
@@ -19,11 +20,13 @@ class Robot:
     }
 
     def __init__(self):
+        self.log = logging.getLogger('vehicle_log')
         self.pi = pigpio.pi()
         self.LED1 = LED(self.pi, self.pins['LED1'])
         self.LED2 = LED(self.pi, self.pins['LED2'])
         self.leftMotor = Motor(self.pi, self.pins["leftMotor1"], self.pins["leftMotor2"], self.pins["leftMotorPWM"], invert=True)
         self.rightMotor = Motor(self.pi, self.pins["rightMotor1"], self.pins["rightMotor2"], self.pins["rightMotorPWM"])
+        self.log.info("'Robot' instance initialized")
     
     def drive(self, x: int, y: int):
         if (x > 100 or y > 100 or x < -100 or y < -100):
@@ -57,7 +60,7 @@ class Robot:
                     leftMV += floor(x/2)
                 else:
                     leftMV = 0
-        print("Motors MVs: %s, %s" % (leftMV, rightMV))
+        self.log.debug("Motors MVs: %s, %s" % (leftMV, rightMV))
         self.leftMotor.mv(leftMV)
         self.rightMotor.mv(rightMV)
     
