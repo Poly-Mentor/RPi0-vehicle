@@ -29,6 +29,8 @@ class Robot:
         self.log.info("'Robot' instance initialized")
     
     def drive(self, x: int, y: int):
+        x = self._clamp100(x)
+        y = self._clamp100(y)
         if (x > 100 or y > 100 or x < -100 or y < -100):
             raise ValueError
         if y > 49 or y < -49 or y == 0:
@@ -52,18 +54,27 @@ class Robot:
         else:
             if y >= 0:
                 if abs(y) > 65:
-                    leftMV -= floor(x/2)
+                    leftMV += floor(x/2)
                 else:
                     leftMV = 0
             if y < 0:
                 if abs(y) > 65:
-                    leftMV += floor(x/2)
+                    leftMV -= floor(x/2)
                 else:
                     leftMV = 0
+        leftMV = self._clamp100(leftMV)
+        rightMV = self._clamp100(rightMV)
         self.log.debug("Motors MVs: %s, %s" % (leftMV, rightMV))
         self.leftMotor.mv(leftMV)
         self.rightMotor.mv(rightMV)
     
+    def _clamp100(self, value):
+        if value > 100:
+            return 100
+        elif value < -100:
+            return -100
+        return value
+
     def run(self):
         for speed in range(100):
             self.leftMotor.mv(speed)

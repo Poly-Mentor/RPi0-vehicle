@@ -11,7 +11,7 @@ def new_message(client, server, message):
     else:
          log.error("can't recognize message received over websocket: %s", message)
 
-server = WebsocketServer(host='127.0.0.1', port=13254, loglevel=logging.INFO)
+server = WebsocketServer(host='0.0.0.0', port=13254, loglevel=logging.INFO)
 robot = Robot()
 log = logging.getLogger('vehicle_log')
 server.set_fn_message_received(new_message)
