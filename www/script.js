@@ -52,10 +52,12 @@ function updateJoy(){
     const output = document.getElementById("joy-output");
     let x_value = joy.GetX();
     let y_value = joy.GetY();
-    output.innerHTML = `X = ${x_value}, Y = ${y_value}`;
+    let direction = joy.GetDir();
+    let lights = document.getElementById('LEDswitch').checked
+    output.innerHTML = `X = ${x_value}, Y = ${y_value}, DIR: ${direction}`;
     let msg = {
-        X : x_value,
-        Y : y_value
+        dir : direction,
+        lights : lights
     }
     if (mySocket.readyState = 1) {
         mySocket.send(JSON.stringify(msg));   

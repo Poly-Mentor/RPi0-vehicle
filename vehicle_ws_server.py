@@ -6,8 +6,13 @@ from robot import Robot
 def new_message(client, server, message):
     log.debug('new message received: %s', message)
     msg = json.loads(message)
-    if "X" in msg and "Y" in msg:
-        robot.drive(int(msg['X']), int(msg['Y']))
+    if "lights" in msg:
+        if msg["lights"]:
+            robot.lights.on()
+        else:
+            robot.lights.off()
+    if "dir" in msg:
+        robot.driveDir(msg['dir'])
     else:
          log.error("can't recognize message received over websocket: %s", message)
 

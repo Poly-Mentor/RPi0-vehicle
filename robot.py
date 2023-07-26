@@ -24,6 +24,7 @@ class Robot:
         self.pi = pigpio.pi()
         self.LED1 = LED(self.pi, self.pins['LED1'])
         self.LED2 = LED(self.pi, self.pins['LED2'])
+        self.lights = LED(self.pi, self.pins['MOSFET1'])
         self.leftMotor = Motor(self.pi, self.pins["leftMotor1"], self.pins["leftMotor2"], self.pins["leftMotorPWM"], invert=True)
         self.rightMotor = Motor(self.pi, self.pins["rightMotor1"], self.pins["rightMotor2"], self.pins["rightMotorPWM"])
         self.log.info("'Robot' instance initialized")
@@ -75,15 +76,34 @@ class Robot:
             return -100
         return value
 
-    def run(self):
-        for speed in range(100):
-            self.leftMotor.mv(speed)
-            self.rightMotor.mv(speed)
-            sleep(0.01)
-        for speed in range(100, 0, -1):
-            self.leftMotor.mv(speed)
-            self.rightMotor.mv(speed)
-            sleep(0.01)
+    def driveDir(self, dir: str):
+        if dir == 'C':
+            self.leftMotor.mv(0)
+            self.rightMotor.mv(0)
+        elif dir == 'N':
+            self.leftMotor.mv(100)
+            self.rightMotor.mv(100)
+        elif dir == 'NE':
+            self.leftMotor.mv(100)
+            self.rightMotor.mv(0)
+        elif dir == 'E':
+            self.leftMotor.mv(100)
+            self.rightMotor.mv(-100)
+        elif dir == 'SE':
+            self.leftMotor.mv(-100)
+            self.rightMotor.mv(0)
+        elif dir == 'S':
+            self.leftMotor.mv(-100)
+            self.rightMotor.mv(-100)
+        elif dir == 'SW':
+            self.leftMotor.mv(0)
+            self.rightMotor.mv(-100)
+        elif dir == 'W':
+            self.leftMotor.mv(-100)
+            self.rightMotor.mv(100)
+        elif dir == 'NW':
+            self.leftMotor.mv(0)
+            self.rightMotor.mv(100)
 
 
 class LED:
