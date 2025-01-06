@@ -5,6 +5,7 @@ var timeout_id = null;
 var mySocket;
 
 function initSocket(){
+    // replace with your IP, keep the port unchanged
     mySocket = new WebSocket("ws://192.168.0.228:13254", "joystick_protocol");
     setInterval(updateState, 50);
     mySocket.onopen = (event) => {

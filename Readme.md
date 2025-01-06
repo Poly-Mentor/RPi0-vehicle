@@ -58,6 +58,31 @@
     
     After system reinstallation, just copy it to your home directory. `install.sh` script will recognize it, unzip, and install this version without downloading Rust and compiling.
 
+8. Modify hardcoded IP addresses
+
+    This is temporary shortcut i took. I'll eliminate that in the future, but for now you need to replace IPs in two files:
+
+    `www/index.html`
+    ```html
+        <body style="background-color:antiquewhite ">
+            <div class="container-fluid">
+                <div class="row p-3">
+                    <div class="col-md-8" id="cameraImage">
+                        <!-- *****replace with your IP, keep the port unchanged****** -->
+                        <img src="http://192.168.0.228:8554/" class="img-fluid">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="LEDswitch">
+                            <label class="form-check-label" for="LEDswitch">LED lights</label>
+                        </div>
+                    </div>
+    ```
+    and
+    `www/script.js`
+    ```javascript
+    function initSocket(){
+        // replace with your IP, keep the port unchanged
+        mySocket = new WebSocket("ws://192.168.0.228:13254", "joystick_protocol");
+    ```
 ## Running
 
 execute starting script
@@ -69,7 +94,24 @@ execute starting script
 open `http://<your-RPi-IP-address>:8000` in your browser on any device in home network, you should see the control panel:
 ![interface](interface.png)
 
-## Credits
+To stop the servers just kill launched jobs:
 
-- [Pithikos](https://github.com/Pithikos) for his [Python Websocket Server](https://github.com/Pithikos/python-websocket-server)
+```
+(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-dev $ jobs
+[1]   Running                 raspivid -ISO 0 -t 0 -n -o - -w 640 -h 480 -fps 10 -b 25000000 -cd MJPEG | raspivid_mjpeg_server &
+[2]-  Running                 python vehicle_ws_server.py &
+[3]+  Running                 python -m http.server --directory ./www &
+
+(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-dev $ kill %1 %2 %3
+
+(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-dev $ jobs
+[1]   Terminated              raspivid -ISO 0 -t 0 -n -o - -w 640 -h 480 -fps 10 -b 25000000 -cd MJPEG | raspivid_mjpeg_server
+[2]-  Terminated              python vehicle_ws_server.py
+[3]+  Terminated              python -m http.server --directory ./www
+```
+
+## Credits
+Thanks for developers sharing their code which has been used there:
+- [Pithikos](https://github.com/Pithikos) for [Python Websocket Server](https://github.com/Pithikos/python-websocket-server)
 - [kig](https://github.com/kig) for [Raspivid MJPEG Server](https://github.com/kig/raspivid_mjpeg_server)
+- [bobboteck](https://github.com/bobboteck) for [JoyStick](https://github.com/bobboteck/JoyStick)
