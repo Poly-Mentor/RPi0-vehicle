@@ -58,6 +58,16 @@
     
     After system reinstallation, just copy it to your home directory. `install.sh` script will recognize it, unzip, and install this version without downloading Rust and compiling.
 
+## Running
+
+execute starting script
+
+```
+. ~/RPi0-vehicle/RPi0-vehicle-dev/start.sh
+```
+
+open `http://<your-RPi-IP-address>:8000` in your browser on any device in home network, you should see the control panel:
+![interface](interface.png)
 
 ## Credits
 
