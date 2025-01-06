@@ -1,9 +1,11 @@
 #! /usr/bin/bash
+. ~/RPi0-vehicle/venv/bin/activate
+echo "Starting pigpio daemon"
 sudo pigpiod
-#rpicam-vid --nopreview -t 0 --width 1296 --height 972 --framerate 10 --inline --listen -o tcp://0.0.0.0:5555
-raspilive 
-cd ~/RPi0-vehicle
+echo "Starting camera stream server"
+raspivid -ISO 0 -t 0 -n -o - -w 640 -h 480 -fps 10 -b 25000000 -cd MJPEG | raspivid_mjpeg_server &
+cd ~/RPi0-vehicle/RPi0-vehicle-dev
 python stream_server.py &
-# python vehicle_ws_server.py &
-# python -m http.server --directory /home/fs/vehicle/www &
+python vehicle_ws_server.py &
+python -m http.server --directory ./www &
 
