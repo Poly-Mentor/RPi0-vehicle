@@ -30,16 +30,16 @@
     sudo apt-get update && sudo apt-get upgrade -y
     ```
 
-<!-- 5. Enable legacy camera stack
+5. Enable legacy camera stack
 
     ```
     sudo raspi-config
     ```
 
     select `Interface options -> Legacy camera support` and enable it
-    go back to main menu, finish and reboot -->
+    go back to main menu, finish and reboot
 
-5. Download and run installation script:
+6. Download and run installation script:
 
     ⚠️ it may take long time to complete, so be patient
 
@@ -47,7 +47,7 @@
     wget https://raw.githubusercontent.com/Poly-Mentor/RPi0-vehicle/dev/install.sh && chmod +x install.sh && bash install.sh
     ```
 
-6. (optional) Save compiled binary
+7. (optional) Save compiled binary
 
     If you want to avoid long re-building raspivid_mjpeg_server after OS reinstallation, you can zip it:
 

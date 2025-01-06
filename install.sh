@@ -14,7 +14,7 @@ rm repo.zip
 if [ -f "raspivid_mjpeg_server_bin.zip" ]; then
     unzip raspivid_mjpeg_server_bin.zip -d raspivid_mjpeg_server
     cd raspivid_mjpeg_server
-    sudo cp raspivid_mjpeg_server-master/raspivid_mjpeg_server /usr/local/bin
+    sudo cp raspivid_mjpeg_server/raspivid_mjpeg_server /usr/local/bin
 # else download sources and compile it
 else
     curl -L -o repo2.zip "https://github.com/kig/raspivid_mjpeg_server/archive/refs/heads/master.zip"
@@ -38,4 +38,4 @@ echo "Creating Python virtual environment"
 cd ~/RPi0-vehicle
 python -m venv --system-site-packages venv
 echo "Activating virtual environment and installing Python dependencies"
-. venv/bin/activate && pip install -r requirements.txt
+. venv/bin/activate && pip install -r RPi0-vehicle-dev/requirements.txt
