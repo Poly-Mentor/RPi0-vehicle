@@ -27,7 +27,7 @@
 4. Update system:
 
     ```
-    sudo apt-get update && sudo apt-get upgrade
+    sudo apt-get update && sudo apt-get upgrade -y
     ```
 
 <!-- 5. Enable legacy camera stack
