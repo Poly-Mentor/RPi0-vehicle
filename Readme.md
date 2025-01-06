@@ -44,7 +44,7 @@
     ⚠️ it may take long time to complete, so be patient
 
     ```
-    wget https://raw.githubusercontent.com/Poly-Mentor/RPi0-vehicle/dev/install.sh && chmod +x install.sh && bash install.sh
+    wget https://raw.githubusercontent.com/Poly-Mentor/RPi0-vehicle/main/install.sh && chmod +x install.sh && bash install.sh
     ```
 
 7. (optional) Save compiled binary
@@ -88,7 +88,7 @@
 execute starting script
 
 ```
-. ~/RPi0-vehicle/RPi0-vehicle-dev/start.sh
+. ~/RPi0-vehicle/RPi0-vehicle-main/start.sh
 ```
 
 open `http://<your-RPi-IP-address>:8000` in your browser on any device in home network, you should see the control panel:
@@ -97,14 +97,14 @@ open `http://<your-RPi-IP-address>:8000` in your browser on any device in home n
 To stop the servers just kill launched jobs:
 
 ```
-(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-dev $ jobs
+(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-main $ jobs
 [1]   Running                 raspivid -ISO 0 -t 0 -n -o - -w 640 -h 480 -fps 10 -b 25000000 -cd MJPEG | raspivid_mjpeg_server &
 [2]-  Running                 python vehicle_ws_server.py &
 [3]+  Running                 python -m http.server --directory ./www &
 
-(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-dev $ kill %1 %2 %3
+(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-main $ kill %1 %2 %3
 
-(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-dev $ jobs
+(venv) fs@RPiZero:~/RPi0-vehicle/RPi0-vehicle-main $ jobs
 [1]   Terminated              raspivid -ISO 0 -t 0 -n -o - -w 640 -h 480 -fps 10 -b 25000000 -cd MJPEG | raspivid_mjpeg_server
 [2]-  Terminated              python vehicle_ws_server.py
 [3]+  Terminated              python -m http.server --directory ./www

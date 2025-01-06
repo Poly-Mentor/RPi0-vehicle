@@ -4,7 +4,7 @@ cd ~
 echo "Installing pigpio"
 sudo apt install pigpio -y
 echo "Downloading sources"
-curl -L -o repo.zip "https://github.com/Poly-Mentor/RPi0-vehicle/archive/refs/heads/dev.zip"
+curl -L -o repo.zip "https://github.com/Poly-Mentor/RPi0-vehicle/archive/refs/heads/main.zip"
 echo "Unzipping sources"
 unzip repo.zip -d RPi0-vehicle
 echo "Removing archive"
@@ -38,4 +38,4 @@ echo "Creating Python virtual environment"
 cd ~/RPi0-vehicle
 python -m venv --system-site-packages venv
 echo "Activating virtual environment and installing Python dependencies"
-. venv/bin/activate && pip install -r RPi0-vehicle-dev/requirements.txt
+. venv/bin/activate && pip install -r RPi0-vehicle-main/requirements.txt
